@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "591 租屋網優化",
+  "description": "優化使用者體驗",
+  "version": "1",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://rent.591.com.tw/*"],
+      "js": ["dist/contentScript.js"]
+    }
+  ]
+}
