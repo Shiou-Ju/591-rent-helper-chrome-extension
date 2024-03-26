@@ -1,0 +1,23 @@
+{
+  "name": "591-rent-helper-chrome-extension",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Shiou-Ju/591-rent-helper-chrome-extension.git",
+  "author": "Bamboo <75402531+Shiou-Ju@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5"
+  },
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write './**/*.{ts,tsx,json,js}'"
+  },
+  "engines": {
+    "node": "20.x"
+  }
+}
