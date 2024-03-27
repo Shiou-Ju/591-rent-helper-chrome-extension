@@ -8,10 +8,23 @@
     "48": "icon.png",
     "128": "icon.png"
   },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "clipboardWrite"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
   "content_scripts": [
     {
-      "matches": ["*://rent.591.com.tw/*"],
-      "js": ["dist/contentScript.js"]
+      "matches": [
+        "*://rent.591.com.tw/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ]
     }
   ]
 }

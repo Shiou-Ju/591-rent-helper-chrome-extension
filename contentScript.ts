@@ -3,7 +3,7 @@ const swipePicture = (event: KeyboardEvent): void => {
     document.querySelector('.prev-btn');
   const nextPictureBtn: HTMLButtonElement = document.querySelector('.next-btn');
   const closePicDetailModal: HTMLButtonElement = document.querySelector(
-    '.photos-detail > div > .close-btn'
+    '.photos-detail > div > .close-btn',
   );
   const morePicModal: HTMLDivElement =
     document.querySelector('.more-photos-page');
@@ -47,4 +47,31 @@ document.addEventListener('click', (event) => {
   if (openModalBtn && openModalBtn.className.includes('view-more')) {
     morePicModal.style.removeProperty('display');
   }
+});
+
+chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
+  if (request.action === 'getHouseInfoText') {
+    const element = document.querySelector('#houseInfo > div.house-title > h1');
+    const elementText =
+      element instanceof HTMLElement ? element.innerText : null;
+
+    if (navigator.clipboard && elementText) {
+      navigator.clipboard
+        .writeText(elementText)
+        .then(() => {
+          sendResponse({ success: true, text: elementText });
+        })
+        .catch((err) => {
+          console.error('Failed to copy text: ', err);
+          sendResponse({ success: false, error: err.toString() });
+        });
+    } else {
+      sendResponse({
+        success: false,
+        error: 'Clipboard API not available or text is null',
+      });
+    }
+  }
+
+  return true;
 });
