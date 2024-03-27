@@ -51,15 +51,47 @@ document.addEventListener('click', (event) => {
 
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   if (request.action === 'getHouseInfoText') {
-    const element = document.querySelector('#houseInfo > div.house-title > h1');
-    const elementText =
-      element instanceof HTMLElement ? element.innerText : null;
+    const titleElement = document.querySelector(
+      '#houseInfo > div.house-title > h1',
+    );
+    const titleText =
+      titleElement instanceof HTMLElement
+        ? titleElement.innerText
+        : 'Title not found';
 
-    if (navigator.clipboard && elementText) {
+    const priceElement = document.querySelector(
+      '#houseInfo > div.house-price > span',
+    );
+    const priceText =
+      priceElement instanceof HTMLElement
+        ? priceElement.innerText
+        : 'Price not found';
+
+    const addressElement = document.querySelector(
+      '#positionRound > div.address.ellipsis > p:nth-child(1) > span.load-map',
+    );
+    const addressText =
+      addressElement instanceof HTMLElement
+        ? addressElement.innerText
+        : 'Address not found';
+
+    const otherFeesElement = document.querySelector(
+      '#houseDetail > div.main-info-list > div.main-info-left > div.content',
+    );
+    const detailsText =
+      otherFeesElement instanceof HTMLElement
+        ? otherFeesElement.innerText
+        : 'Details not found';
+
+    const currentUrl = document.location.href;
+
+    const combinedText = `Title: ${titleText}\n\nPrice: ${priceText}\n\nAddress: ${addressText}\n\nOtherFees:\n\n${detailsText}\n\nURL:\n${currentUrl}`;
+
+    if (navigator.clipboard && combinedText) {
       navigator.clipboard
-        .writeText(elementText)
+        .writeText(combinedText)
         .then(() => {
-          sendResponse({ success: true, text: elementText });
+          sendResponse({ success: true, text: combinedText });
         })
         .catch((err) => {
           console.error('Failed to copy text: ', err);
