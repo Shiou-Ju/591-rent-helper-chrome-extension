@@ -8,9 +8,13 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
-function isTextEncodable(text: string | undefined): text is string {
-  return typeof text === 'string' && text.trim().length > 0;
-}
+// function isTextEncodable(text: string | undefined): text is string {
+//   return typeof text === 'string' && text.trim().length > 0;
+// }
+
+// FIXME:
+// https://rent.591.com.tw/home/16286976?s=ac
+// this link can not use bopy
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId !== OPTION_ID) return;
